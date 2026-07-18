@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AeroTouch launch background: solid brand black, matching the in-app theme
+     so the native splash blends seamlessly into the first Flutter frame. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/aerotouch_background" />
+</layer-list>

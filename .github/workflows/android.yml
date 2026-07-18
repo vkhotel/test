@@ -24,6 +24,13 @@ jobs:
           channel: 'stable'
           cache: true
 
+      # Fetch packages first: as a side effect this writes
+      # android/local.properties (with flutter.sdk=... etc.), which
+      # android/settings.gradle needs to even be evaluated - it must exist
+      # before we can run any Gradle command below, including "wrapper".
+      - name: Fetch packages
+        run: flutter pub get
+
       # gradle-wrapper.jar is a binary file and can't be committed to
       # source, so android/gradlew doesn't exist in this repo yet - generate
       # a real one here, matching the Gradle version this project expects.
@@ -35,9 +42,6 @@ jobs:
         run: |
           gradle wrapper --gradle-version 8.4
           chmod +x gradlew
-
-      - name: Fetch packages
-        run: flutter pub get
 
       - name: Run tests
         run: flutter test
